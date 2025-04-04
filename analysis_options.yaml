@@ -12,7 +12,10 @@ analyzer:
     invalid_override: error
     dead_code: warning
     overridden_fields: ignore
+    inference_failure_on_instance_creation: ignore
     always_specify_types: ignore
+    invalid_annotation_target: ignore
+    strict_raw_type: ignore
 
 linter:
   rules:

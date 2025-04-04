@@ -1,4 +1,4 @@
-package com.nopolycog.currex.currex
+package com.nopolycog.currex
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -60,6 +60,11 @@ linked_*.ds
 unlinked.ds
 unlinked_spec.ds
 .metadata
+*.gr.dart
+*.config.dart
+*.g.dart
+keys.dart
+*.freezed.dart
 
 # Android related
 **/android/**/gradle-wrapper.jar

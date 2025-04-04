@@ -1,2 +1,1 @@
-# currencies
-сurrency exchange app
+# currex
