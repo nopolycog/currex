@@ -7,10 +7,10 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
-  # Core
   flutter:
     sdk: flutter
 
+  # Core
   get_it: ^8.0.3
   crypto: ^3.0.6
   freezed_annotation: ^3.0.0
@@ -31,6 +31,7 @@ dependencies:
 
   # UI
   gap: ^3.0.1
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
