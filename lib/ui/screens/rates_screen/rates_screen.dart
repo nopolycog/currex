@@ -79,10 +79,15 @@ class _RatesScreenState extends ConsumerState<RatesScreen> with PriceMixin {
                     padding: const EdgeInsets.symmetric(horizontal: AppSizes.size4x),
                     itemBuilder:
                         (BuildContext context, int index) => ListTile(
-                          title: Text(state.rates?[index].symbol ?? '', style: AppTextStyles().bodyMedium),
+                          title: Text(
+                            '${state.rates?[index].symbol}',
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyles().bodyMedium,
+                          ),
                           trailing: Text(
-                            '\$${trimDecimal(state.rates?[index].priceUsd ?? '')}',
+                            '\$${trimDecimal(state.rates?[index].priceUsd ?? '')} ',
                             style: AppTextStyles().subheadRegular,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           leading: AppRateImage(path: state.rates?[index].symbol ?? ''),
                           contentPadding: EdgeInsets.zero,
