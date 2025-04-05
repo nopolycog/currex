@@ -21,27 +21,7 @@ class RatesScreen extends ConsumerStatefulWidget {
 }
 
 class _RatesScreenState extends ConsumerState<RatesScreen> with PriceMixin {
-  final ScrollController scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-    scrollController.addListener(() {
-      if (shouldLoadMore()) {
-        ref.watch(ratesProvider.notifier).loadMoreRates();
-      }
-    });
-  }
-
-  bool shouldLoadMore() {
-    if (ref.watch(ratesProvider).isLoading || !ref.watch(ratesProvider).hasMore) return false;
-    final position = scrollController.position;
-    return position.pixels > position.maxScrollExtent * 0.7;
-  }
-
   Future<void> onRefresh() async => await ref.watch(ratesProvider.notifier).refresh();
-
-  Future<void> onUpdate() async => await ref.watch(ratesProvider.notifier).update();
 
   void onTapSignOut() {
     ref.watch(authProvider.notifier).logout();
@@ -58,7 +38,7 @@ class _RatesScreenState extends ConsumerState<RatesScreen> with PriceMixin {
         leading:
             state.isUpdating
                 ? const CupertinoActivityIndicator()
-                : IconButton(onPressed: onUpdate, icon: const Icon(Icons.refresh_rounded)),
+                : IconButton(onPressed: onRefresh, icon: const Icon(Icons.refresh_rounded)),
         actions: <Widget>[IconButton(onPressed: onTapSignOut, icon: const Icon(Icons.logout_rounded))],
       ),
       body: AnimatedSwitcher(
@@ -73,23 +53,22 @@ class _RatesScreenState extends ConsumerState<RatesScreen> with PriceMixin {
                 : RefreshIndicator.adaptive(
                   onRefresh: onRefresh,
                   child: ListView.separated(
-                    controller: scrollController,
                     separatorBuilder: (_, _) => const Divider(height: 1),
-                    itemCount: state.rates?.length ?? 0,
+                    itemCount: state.ratesCrypto?.length ?? 0,
                     padding: const EdgeInsets.symmetric(horizontal: AppSizes.size4x),
                     itemBuilder:
                         (BuildContext context, int index) => ListTile(
                           title: Text(
-                            '${state.rates?[index].symbol}',
+                            '${state.ratesCrypto?[index].symbol}',
                             overflow: TextOverflow.ellipsis,
                             style: AppTextStyles().bodyMedium,
                           ),
                           trailing: Text(
-                            '\$${trimDecimal(state.rates?[index].priceUsd ?? '')} ',
+                            '\$${trimDecimal(state.ratesCrypto?[index].rateUsd ?? '')} ',
                             style: AppTextStyles().subheadRegular,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          leading: AppRateImage(path: state.rates?[index].symbol ?? ''),
+                          leading: AppRateImage(path: state.ratesCrypto?[index].symbol ?? ''),
                           contentPadding: EdgeInsets.zero,
                         ),
                   ),

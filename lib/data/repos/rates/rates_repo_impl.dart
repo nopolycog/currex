@@ -9,9 +9,9 @@ class RatesRepoImpl extends RatesRepo {
   RatesRepoImpl(this.source);
 
   @override
-  Future<(List<RateModel>?, DioException?)> getRates(int limit, int offset) async {
+  Future<(List<RateModel>?, DioException?)> getRates() async {
     try {
-      final response = await source.get('assets?limit=$limit&offset=$offset');
+      final response = await source.get('rates');
       return ((response.data['data'] as List).map((e) => RateModel.fromJson(e as Map<String, dynamic>)).toList(), null);
     } on DioException catch (error) {
       return (null, error);

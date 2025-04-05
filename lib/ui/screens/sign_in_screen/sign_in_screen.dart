@@ -50,23 +50,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             AppGaps.size12x,
             Text('Login', style: AppTextStyles().subheadMedium),
             AppGaps.size2x,
-            TextField(
-              controller: loginController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.symmetric(horizontal: AppSizes.size2x, vertical: AppSizes.size1x),
-              ),
-            ),
+            TextField(controller: loginController),
             AppGaps.size4x,
             Text('Password', style: AppTextStyles().subheadMedium),
             AppGaps.size2x,
-            TextField(
-              controller: passController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.symmetric(horizontal: AppSizes.size2x, vertical: AppSizes.size1x),
-              ),
-            ),
+            TextField(controller: passController),
             AppGaps.size4x,
             SizedBox(
               width: double.infinity,

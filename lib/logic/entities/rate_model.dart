@@ -6,12 +6,7 @@ part 'rate_model.g.dart';
 @freezed
 sealed class RateModel with _$RateModel {
   @JsonSerializable(explicitToJson: true)
-  const factory RateModel({
-    required String? id,
-    required String? symbol,
-    required String? name,
-    required String? priceUsd,
-  }) = _RateModel;
+  const factory RateModel({String? id, String? symbol, String? type, String? rateUsd}) = _RateModel;
 
   factory RateModel.fromJson(Map<String, Object?> json) => _$RateModelFromJson(json);
 }
