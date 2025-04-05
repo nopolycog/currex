@@ -15,8 +15,8 @@ class AppRateImage extends StatelessWidget {
             borderRadius: BorderRadius.circular(100),
             child: Image(image: imageProvider, fit: BoxFit.contain, height: 30, width: 30),
           ),
-      placeholder: (_, _) => const SizedBox(),
-      errorWidget: (_, _, _) => const SizedBox(),
+      placeholder: (_, _) => const SizedBox(height: 30, width: 30),
+      errorWidget: (_, _, _) => const SizedBox(height: 30, width: 30),
     );
   }
 }
