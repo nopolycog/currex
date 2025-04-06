@@ -18,21 +18,10 @@ class AppItemSelector extends StatefulWidget {
 }
 
 class _AppItemSelectorState extends State<AppItemSelector> {
-  late FixedExtentScrollController scrollController;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.selectedItem != null) {
-      scrollController = FixedExtentScrollController(initialItem: widget.items?.indexOf(widget.selectedItem!) ?? 0);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(AppSizes.size1x),
-
       onTap:
           () => showModalBottomSheet(
             context: context,
@@ -57,6 +46,9 @@ class _AppItemSelectorState extends State<AppItemSelector> {
                       const Divider(height: 1),
                       Expanded(
                         child: CupertinoPicker(
+                          scrollController: FixedExtentScrollController(
+                            initialItem: widget.items?.indexOf(widget.selectedItem!) ?? 0,
+                          ),
                           itemExtent: 50,
                           selectionOverlay: const AppSelectionOverlay(),
                           onSelectedItemChanged: widget.onSelectedItemChanged,

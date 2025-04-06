@@ -3,6 +3,7 @@ import 'package:currex/logic/repos/rates/rates_repo.dart';
 import 'package:currex/ui/di/di.dart';
 import 'package:currex/ui/screens/convert_screen/convert_provider.dart';
 import 'package:currex/ui/screens/rates_screen/rates_state.dart';
+import 'package:flutter/rendering.dart' show debugPrint;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'rates_provider.g.dart';
@@ -14,7 +15,7 @@ class Rates extends _$Rates {
   @override
   RatesState build() {
     _getRates();
-    // _startTimer();
+    _startTimer();
     return RatesState();
   }
 
@@ -46,6 +47,7 @@ class Rates extends _$Rates {
   Future<void> refresh() async {
     state = state.copyWith(isUpdating: true);
     final result = await getIt<RatesRepo>().getRates();
+    debugPrint('refreshing');
     state = state.copyWith(
       status: RatesStatus.done,
       ratesCrypto: (result.$1 ?? []).where((value) => value.type == 'crypto').toList(),
@@ -53,6 +55,6 @@ class Rates extends _$Rates {
       error: result.$2,
       isUpdating: false,
     );
-    ref.read(convertProvider.notifier).get();
+    ref.read(convertProvider.notifier).update();
   }
 }

@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:currex/ui/common/mixins.dart';
 import 'package:currex/ui/common/sizes.dart';
 import 'package:currex/ui/global_providers/auth_provider.dart';
+import 'package:currex/ui/screens/convert_screen/convert_provider.dart';
 import 'package:currex/ui/screens/rates_screen/rates_provider.dart';
 import 'package:currex/ui/screens/rates_screen/rates_state.dart';
 import 'package:currex/ui/theme/text_styles.dart';
@@ -25,6 +26,8 @@ class _RatesScreenState extends ConsumerState<RatesScreen> with PriceMixin {
 
   void onTapSignOut() {
     ref.watch(authProvider.notifier).logout();
+    ref.invalidate(ratesProvider);
+    ref.invalidate(convertProvider);
     context.router.replacePath('/sign_in');
   }
 
@@ -32,6 +35,7 @@ class _RatesScreenState extends ConsumerState<RatesScreen> with PriceMixin {
   Widget build(BuildContext context) {
     final RatesState state = ref.watch(ratesProvider);
     return Scaffold(
+      key: const ValueKey('ratesScreen'),
       appBar: AppBar(
         title: Text('Rates', style: AppTextStyles().bodyMedium),
         centerTitle: true,
@@ -45,7 +49,7 @@ class _RatesScreenState extends ConsumerState<RatesScreen> with PriceMixin {
         duration: const Duration(milliseconds: 500),
         child:
             state.isLoading
-                ? const Center(child: CupertinoActivityIndicator())
+                ? const Center(child: CupertinoActivityIndicator(key: ValueKey('ratesLoadingIndicator')))
                 : state.hasError
                 ? Center(
                   child: Text('Error: ${state.error?.type.name ?? 'Unknown error'}', style: AppTextStyles().bodyMedium),
@@ -53,6 +57,7 @@ class _RatesScreenState extends ConsumerState<RatesScreen> with PriceMixin {
                 : RefreshIndicator.adaptive(
                   onRefresh: onRefresh,
                   child: ListView.separated(
+                    key: const ValueKey('ratesList'),
                     separatorBuilder: (_, _) => const Divider(height: 1),
                     itemCount: state.ratesCrypto?.length ?? 0,
                     padding: const EdgeInsets.symmetric(horizontal: AppSizes.size4x),

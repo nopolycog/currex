@@ -18,6 +18,13 @@ class Convert extends _$Convert {
     );
   }
 
+  Future<void> update() async {
+    state = state.copyWith(
+      from: ref.read(ratesProvider).ratesCrypto?.firstWhere((value) => value == state.from),
+      to: ref.read(ratesProvider).ratesFiat?.firstWhere((value) => value == state.to),
+    );
+  }
+
   void onSelectedFrom(int index) {
     state = state.copyWith(from: ref.read(ratesProvider).ratesCrypto?[index]);
   }

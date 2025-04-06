@@ -8,11 +8,17 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, _) {
-        final AppRouter appRouter = AppRouter(ref);
-        return MaterialApp.router(theme: AppThemes.light, darkTheme: AppThemes.dark, routerConfig: appRouter.config());
-      },
+    return ProviderScope(
+      child: Consumer(
+        builder: (context, ref, _) {
+          final AppRouter appRouter = AppRouter(ref);
+          return MaterialApp.router(
+            theme: AppThemes.light,
+            darkTheme: AppThemes.dark,
+            routerConfig: appRouter.config(),
+          );
+        },
+      ),
     );
   }
 }

@@ -28,18 +28,20 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   }
 
   Future<void> onTapSignIn() async {
-    // await ref.read(authProvider.notifier).login('${loginController.text.trim()}.${passController.text.trim()}');
-    await ref.read(authProvider.notifier).login('demo.demo');
+    await ref.read(authProvider.notifier).login('${loginController.text.trim()}.${passController.text.trim()}');
     if (mounted) {
       status == AuthStatus.auth
           ? context.router.replacePath('/rates')
-          : ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Wrong login or password!')));
+          : ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(key: ValueKey('errorSnackbar'), content: Text('Wrong login or password!')));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: const ValueKey('signInScreen'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppSizes.size4x),
         child: Column(
@@ -50,15 +52,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             AppGaps.size12x,
             Text('Login', style: AppTextStyles().subheadMedium),
             AppGaps.size2x,
-            TextField(controller: loginController),
+            TextField(key: const ValueKey('loginField'), controller: loginController),
             AppGaps.size4x,
             Text('Password', style: AppTextStyles().subheadMedium),
             AppGaps.size2x,
-            TextField(controller: passController),
+            TextField(key: const ValueKey('passwordField'), controller: passController),
             AppGaps.size4x,
             SizedBox(
               width: double.infinity,
               child: FilledButton(
+                key: const ValueKey('signInButton'),
                 onPressed: onTapSignIn,
                 style: ButtonStyle(
                   shape: WidgetStateProperty.all<RoundedRectangleBorder>(

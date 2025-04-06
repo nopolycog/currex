@@ -41,6 +41,8 @@ class _ConvertScreenState extends ConsumerState<ConvertScreen> with PriceMixin {
 
   void onTapSignOut() {
     ref.watch(authProvider.notifier).logout();
+    ref.invalidate(ratesProvider);
+    ref.invalidate(convertProvider);
     context.router.replacePath('/sign_in');
   }
 
@@ -49,6 +51,7 @@ class _ConvertScreenState extends ConsumerState<ConvertScreen> with PriceMixin {
     final ConvertState convertState = ref.watch(convertProvider);
     final RatesState ratesState = ref.watch(ratesProvider);
     return Scaffold(
+      key: const ValueKey('convertScreen'),
       appBar: AppBar(
         title: Text('Convert', style: AppTextStyles().bodyMedium),
         actions: <Widget>[IconButton(onPressed: onTapSignOut, icon: const Icon(Icons.logout_rounded))],
