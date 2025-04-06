@@ -120,14 +120,14 @@ class _ConvertScreenState extends ConsumerState<ConvertScreen> with PriceMixin {
                             AppGaps.size2x,
                             FittedBox(
                               child: Text(
-                                '${trimDecimal((calculateAmount() * 1.03).toString())} ${convertState.to?.symbol}',
+                                '${trimDecimal((calculateAmount() * 1.03).toString(), maxLength: 2)} ${convertState.to?.symbol}',
                                 style: AppTextStyles().title1Medium.copyWith(color: context.colorScheme.primary),
                               ),
                             ),
                             AppGaps.size1x,
                             FittedBox(
                               child: Text(
-                                '(${trimDecimal(calculateAmount().toString())} ${convertState.to?.symbol} + 3%)',
+                                '(${trimDecimal(calculateAmount().toString(), maxLength: 2)} ${convertState.to?.symbol} + 3%)',
                                 style: AppTextStyles().subheadRegular,
                               ),
                             ),
