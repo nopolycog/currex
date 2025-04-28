@@ -1,6 +1,6 @@
 import 'dart:async' show Timer;
 import 'package:currex/logic/repos/rates/rates_repo.dart';
-import 'package:currex/ui/di/di.dart';
+import 'package:currex/logic/di/di.dart';
 import 'package:currex/ui/screens/convert_screen/convert_provider.dart';
 import 'package:currex/ui/screens/rates_screen/rates_state.dart';
 import 'package:flutter/rendering.dart' show debugPrint;

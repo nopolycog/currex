@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:currex/logic/repos/auth/auth_repo.dart';
-import 'package:currex/ui/di/di.dart';
+import 'package:currex/logic/di/di.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_provider.g.dart';
